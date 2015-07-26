@@ -30,9 +30,12 @@ The render command was extended to accept optional parameters to support
 multi-threading, mirror reflections, anti-aliasing, soft shadows, and glossy
 reflections and background images:
 \begin{lstlisting}
-  gr.render(<scene_root_node>, <filename>, <width>, <height>, <eye>, <view>,
-  <up>, <fov>, <ambient>, <lights>, <threads> = 1, <recurse_level> = 0,
-  <aa_samples> = 1, <shadow_samples> = 1, <glossy_samples> = 1,
+  gr.render(<scene_root_node>, <filename>, 
+  <width>, <height>, <eye>, <view>,
+  <up>, <fov>, <ambient>, <lights>, 
+  <threads> = 1, <recurse_level> = 0,
+  <aa_samples> = 1, <shadow_samples> = 1, 
+  <glossy_samples> = 1, 
   <background_filename> = null)
 \end{lstlisting}
 The \verb|<threads>| option is used to specify the number of threads used by the
@@ -72,9 +75,9 @@ of extra primitives.
 The following commands were added to the language in order to support rendering
 of constructive solid geometry objects.
 \begin{itemize}
-  \item \verb|gr.csg_union(<name>, <geometry_node>, <geometry_node>)|
-  \item \verb|gr.csg_intersection(<name>, <geometry_node>, <geometry_node>)|
-  \item \verb|gr.csg_difference(<name>, <geometry_node>, <geometry_node>)|
+  \item \verb|gr.csg_union(<name>, <node>, <node>)|
+  \item \verb|gr.csg_intersection(<name>, <node>, <node>)|
+  \item \verb|gr.csg_difference(<name>, <node>, <node>)|
 \end{itemize}
 
 \subsection*{Anti-Aliasing}
@@ -85,7 +88,8 @@ anti-aliasing in the modelling language.
 The following command was added to the language to create area lights that are
 used for the soft shadow computations:
 \begin{lstlisting}
-  gr.disc_light(<position>, <colour>, <attenuation>, <normal>, <radius>)
+  gr.disc_light(<position>, <colour>, 
+  <attenuation>, <normal>, <radius>)
 \end{lstlisting}
 The command is a modification of the \verb|gr.light| command with two new
 parameters added. The \verb|<normal>| parameter specifies the normal of the disc
@@ -122,7 +126,8 @@ faces into triangles as well as generating per vertex normals on instantiation.
 \subsection*{Refraction}
 The \verb|gr.material| command was extended as follows:
 \begin{lstlisting}
-  gr.material(<diffuse>, <specular>, <shininess>, <ni> = 0)
+  gr.material(<diffuse>, <specular>, 
+  <shininess>, <ni> = 0)
 \end{lstlisting}
 The optional \verb|<ni>| parameter was added to specify the index of refraction
 of the material. The default value is zero which indicates that the material is
