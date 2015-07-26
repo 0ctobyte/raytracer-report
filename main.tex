@@ -1,0 +1,50 @@
+% book example for classicthesis.sty
+\documentclass[
+  % Replace twoside with oneside if you are printing your thesis on a single side
+  % of the paper, or for viewing on screen.
+  oneside,
+  %twoside,
+  11pt, a4paper,
+  footinclude=true,
+  headinclude=true,
+  cleardoublepage=empty
+]{scrbook}
+
+\usepackage{lipsum}
+\usepackage[linedheaders,parts,pdfspacing]{classicthesis}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{acronym}
+
+\title{Thesis Title}
+\author{John Doe}
+
+\begin{document}
+
+\maketitle
+
+% Front Matter
+\include{FrontBackMatter/contents}
+\include{FrontBackMatter/acknowledgements}
+
+% Body
+\include{Body/introduction}
+\include{Body/manual}
+\include{Body/code_organization}
+\include{Body/implementation}
+\include{Body/Implementation/extra_primitives}
+\include{Body/Implementation/csg}
+\include{Body/Implementation/soft_shadows}
+\include{Body/Implementation/anti_aliasing}
+\include{Body/Implementation/texture_mapping}
+\include{Body/Implementation/bump_mapping}
+\include{Body/Implementation/refraction}
+\include{Body/Implementation/phong_shading}
+\include{Body/Implementation/perlin_noise}
+\include{Body/Implementation/glossy_reflection}
+\include{Body/conclusion}
+
+% Back Matter
+\include{FrontBackMatter/references}
+    
+\end{document}
