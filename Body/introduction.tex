@@ -11,6 +11,51 @@ complexity and are functionalities which I believe are necessary for a
 reasonably complex ray tracer to posses.
 
 \section{Statement}
+I will attempt to build a reasonably complex ray tracer able to generate
+photorealistic images of complex scenes that satisfy the ten objectives listed
+below. I am also interested in implementing extra functionality such as parallel
+ray tracing, uniform space subdivision, caustics using illumination map and
+motion blur. I will generate scenes that display the functionality of each of
+the objectives listed below and if time permits I will also attempt to satisfy
+any extra objectives. As a note, I have implemented mirror reflections as part
+of assignment four and so have not included it as an objective for ths project.
 
+I find the topic of ray tracing to be very interesting to me and I have spent
+considerable amount of time reading the seminal literature related to ray
+tracing techniques. The challenge for me will be to implement these techniques
+in an efficient manner while generating high quality images. Soft shadows,
+glossy reflection and anti-aliasing (three of the techniques I wish to implement
+for this project) are all techniques that increase the time it takes to produce
+a ray traced image and it will be quite a challenge to implement these
+techniques efficiently.
+
+I hope that at the completion of this project I will learn many of the important
+algorithms and techniques used in ray tracing as well as learning new and better
+methods of efficient programming. I hope to also keep working on this project
+even after completing this course and continue to implement other modern ray
+tracing techniques.
 
 \section{Objectives}
+Below is a list of the objectives for this project in the order in which they
+were completed. 
+
+\begin{itemize}
+  \item Extra Primitives
+  \item Constructive Solid Geometry
+  \item Anti-Aliasing
+  \item Soft Shadows
+  \item Texture Mapping
+  \item Bump Mapping
+  \item Phong Shading
+  \item Refraction
+  \item Glossy Reflection
+  \item Perlin Noise
+\end{itemize}
+
+The two objectives I had stuggled with the most during the
+project was bump mapping and perlin noise. Although the concept of bump mapping
+is similar to that of texture mapping (which I had found relatively simple to
+implement), I struggled with understangin the mathematics behind the
+implementation of bump mapping. For Perlin noise, I was able to implement the
+relatively straight-forward noise function but struggled to understand how to
+use the noise function in a way to generate meaningful textures.
