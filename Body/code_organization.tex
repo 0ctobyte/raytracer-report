@@ -25,5 +25,67 @@ in PNG format. The mesh definition files must be in the OBJ format.
 Below is a list of all the source files in the project and brief description of
 their purpose.
 
+\subsection*{a4.cpp, a4.hpp}
+This is the where the core of the ray tracer is contained. This file includes
+the recursive \verb|a4_trace_ray| function as well as functions to generate
+reflection and refaction rays. It also contains code for thread creation and the
+\verb|a4_lighting| function which applies the Lambertion lighting model to each
+pixel.
 
+\subsection*{algebra.cpp, algebra.hpp}
+These files contains \verb|Point2D|, \verb|Point3D|, \verb|Vector2D|,
+\verb|Vector3D|, \verb|Matrix4x4| and \verb|Colour| classes as well as 
+structures to represent \verb|Rays| and \verb|Intersections|.
+
+\subsection*{image.cpp, image.hpp}
+These files contains a class to load, save and manipulate PNG image files.
+
+\subsection*{light.cpp, light.hpp}
+These files contains the \verb|Light| class to represent point lights and the
+\verb|DiscLight| class to represent area lights.
+
+\subsection*{lua488.hpp}
+This file just includes some of the Lua headers.
+
+\subsection*{main.cpp}
+This is the main entry point of the program. It just initializes the Lua
+environment and hands off execution to the Lua interpreter which begins
+interpreting the given Lua scene script.
+
+\subsection*{material.cpp, material.hpp}
+These files contain the \verb|Material| and \verb|PhongMaterial| class which
+represents a material. The \verb|PhongMaterial| class was extended in order to
+support textures, bump maps and index of refraction attributes.
+
+\subsection*{mesh.cpp, mesh.hpp}
+These files contain the implementation of the \verb|Mesh| class which holds a
+list of vertices and faces. The \verb|Mesh| class is a sub-class of the
+\verb|Primitive| class which means it must implement the \verb|intersection|
+method. A new class was added, \verb|TriMesh|, which is a sub-class of 
+\verb|Mesh| which subdivides a mesh's face list into triangles and then
+generates and stores per-vertex normals on instantiation.
+
+\subsection*{perlin.cpp, perlin.hpp}
+These files contain the \verb|Perlin| class which contains only static methods
+that generate scaling factors (which follow a certain pattern depending on the
+desired texture) that are used to modify the diffuse colour of a material.
+
+\subsection*{polyroots.cpp, polyroots.hpp}
+These files contain functions to solve quadratic, cubic and quartic polynomial
+equations.
+
+\subsection*{primitive.cpp, primitive.hpp}
+These files contain a number of primitive classes described in the last section.
+Each of these primitive classes implement the \verb|intersection| method.
+
+\subsection*{scene.cpp, scene.hpp}
+These files contain the \verb|SceneNode| class and it's sub-classes, most 
+notably the \verb|GeometryNode| and \verb|ConstructiveSolidGeometryNode| 
+classes. The \verb|SceneNode| class is used to construct a scene graph
+containing a number of primitives and meshes.
+
+\subsection*{scene_lua.cpp, scene_lua.hpp}
+These files contain the implementation of the custom Lua commands used for the
+modelling language. All new Lua commands and modifications of old commands were
+added here.
 
