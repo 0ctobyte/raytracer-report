@@ -6,12 +6,139 @@
 
 \section{Usage}
 Running the ray tracer is very simple. Assuming the scene is specified by a file
-named \verb|scene.lua|,
-then to run the ray tracer
-on the specified scene file the following command shall be entered into the
-shell:
+named \verb|scene.lua|, then to run the ray tracer on the specified scene file
+the following command shall be entered into the shell:
 \begin{verbatim}
     ./rt scene.lua
 \end{verbatim}
+An image file will be produced in the same directory with the filename specified
+in the  \verb|scene.lua| file. There will be no user interaction while the ray
+tracer executable is running. The program will, however, display a progress bar.
+
+There are no other command line options available for the executable. However,
+optional parameters can be specified in the Lua scene file which will be
+described in the next section.
 
 \section{Modelling Language Extensions}
+The LUA modelling language was extended to support many of the objectives that
+were implemented for this project. Below is a summary of the changes made to old
+commands as well as new commands that were added to the language for each of the
+objectives implemented for this project.
+
+\subsection*{Render Command}
+The render command was extended to accept optional parameters to support
+multi-threading, mirror reflections, anti-aliasing, soft shadows, and glossy
+reflections and background images:
+\begin{verbatim}
+  gr.render(<scene_root_node>, <filename>, <width>, <height>, <eye>, <view>,
+  <up>, <fov>, <ambient>, <lights>, <threads> = 1, <recurse_level> = 0,
+  <aa_samples> = 1, <shadow_samples> = 1, <glossy_samples> = 1,
+  <background_filename> = null)
+\end{verbatim}
+The \verb|<threads>| option is used to specify the number of threads used by the
+ray tracer. The default is one thread.
+
+The \verb|<recurse_level>| option specifies the maximum number of times that the
+\verb|a4_trace_ray| function is called recursively. The default for this option
+is zero in which case mirror reflections and refractions will not be rendered.
+
+The \verb|<aa_samples>| option specifies the number of rays that are cast for each
+pixel in order to perform anti-aliasing. The default is one ray per pixel.
+
+The \verb|<shadow_samples>| option specifies the number of shadow rays that are
+cast for each pixel in order to perform soft shadow rendering. The default is
+one shadow ray per pixel.
+
+The \verb|<glossy_samples>| option specifies the number of reflection rays that
+are cast for each pixel in order to perform glossy reflection rendering. The
+default is one reflection ray per pixel.
+
+The \verb|<background_filename>| option specifies the filename of the image to
+use as the background for the scene. The default is a null value meaning no
+background image will be used.
+
+\subsection*{Extra Primitives}
+The following commands were added to the language in order to support rendering
+of extra primitives.
+\begin{itemize}
+  \item \verb|gr.cone(<name>)|
+  \item \verb|gr.cylinder(<name>)|
+  \item \verb|gr.disc(<name>)|
+  \item \verb|gr.plane(<name>)|
+  \item \verb|gr.torus(<name>)|
+\end{itemize}
+
+\subsection*{Constructive Solid Geometry}
+The following commands were added to the language in order to support rendering
+of constructive solid geometry objects.
+\begin{itemize}
+  \item \verb|gr.csg_union(<name>, <geometry_node>, <geometry_node>)|
+  \item \verb|gr.csg_intersection(<name>, <geometry_node>, <geometry_node>)|
+  \item \verb|gr.csg_difference(<name>, <geometry_node>, <geometry_node>)|
+\end{itemize}
+
+\subsection*{Anti-Aliasing}
+See the modifications made to \verb|gr.render| command above in order to support
+anti-aliasing in the modelling language.
+
+\subsection*{Soft Shadows}
+The following command was added to the language to create area lights that are
+used for the soft shadow computations:
+\begin{verbatim}
+  gr.disc_light(<position>, <colour>, <attenuation>, <normal>, <radius>)
+\end{verbatim}
+The command is a modification of the \verb|gr.light| command with two new
+parameters added. The \verb|<normal>| parameter specifies the normal of the disc
+light source and the \verb|<radius>| parameter specifies the radius of the disc
+light source.
+
+\subsection*{Texture Mapping}
+The following command was added to the language to apply a texture image file
+to the specified \verb|node|:
+\begin{verbatim}
+  node:set_texture(<filename>)
+\end{verbatim}
+The \verb|node| object must have had a material applied before using this
+command via the \verb|set_material| command.
+
+\subsection*{Bump Mapping}
+The following command was added to the language to apply a bump map image file
+to the specified \verb|node|:
+\begin{verbatim}
+  node:set_bumpmap(<filename>)
+\end{verbatim}
+The \verb|node| object must have had a material applied before using this
+command via the \verb|set_material| command.
+
+\subsection*{Phong Shading}
+The following command is used to construct a mesh with a set of vertices and a
+set of faces that contain indices into the vertex list:
+\begin{verbatim}
+  gr.tri_mesh(<name>, <verts>, <faces>)
+\end{verbatim}
+This command differs from the \verb|gr.mesh| command in that it subdivides the
+faces into triangles as well as generating per vertex normals on instantiation.
+
+\subsection*{Refraction}
+The \verb|gr.material| command was extended as follows:
+\begin{verbatim}
+  gr.material(<diffuse>, <specular>, <shininess>, <ni> = 0)
+\end{verbatim}
+The optional \verb|<ni>| parameter was added to specify the index of refraction
+of the material. The default value is zero which indicates that the material is
+not refractive.
+
+\subsection*{Glossy Reflection}
+See the modifications made to the \verb|gr.render| command above in order to
+support anti-aliasing.
+
+\subsection*{Perlin Noise}
+The following command was added to the language to apply a procedurally
+generated texture using Perlin noise to the specified \verb|node|:
+\begin{verbatim}
+  node:set_perlin(<type>)
+\end{verbatim}
+The \verb|<type>| option specifies which procedural texture to apply to the
+node. The \verb|node| object must have had a material applied before using this
+command via the \verb|set_material| command.
+
