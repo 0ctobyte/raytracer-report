@@ -8,9 +8,9 @@
 Running the ray tracer is very simple. Assuming the scene is specified by a file
 named \verb|scene.lua|, then to run the ray tracer on the specified scene file
 the following command shall be entered into the shell:
-\begin{verbatim}
+\begin{lstlisting}
     ./rt scene.lua
-\end{verbatim}
+\end{lstlisting}
 An image file will be produced in the same directory with the filename specified
 in the  \verb|scene.lua| file. There will be no user interaction while the ray
 tracer executable is running. The program will, however, display a progress bar.
@@ -29,12 +29,12 @@ objectives implemented for this project.
 The render command was extended to accept optional parameters to support
 multi-threading, mirror reflections, anti-aliasing, soft shadows, and glossy
 reflections and background images:
-\begin{verbatim}
+\begin{lstlisting}
   gr.render(<scene_root_node>, <filename>, <width>, <height>, <eye>, <view>,
   <up>, <fov>, <ambient>, <lights>, <threads> = 1, <recurse_level> = 0,
   <aa_samples> = 1, <shadow_samples> = 1, <glossy_samples> = 1,
   <background_filename> = null)
-\end{verbatim}
+\end{lstlisting}
 The \verb|<threads>| option is used to specify the number of threads used by the
 ray tracer. The default is one thread.
 
@@ -84,9 +84,9 @@ anti-aliasing in the modelling language.
 \subsection*{Soft Shadows}
 The following command was added to the language to create area lights that are
 used for the soft shadow computations:
-\begin{verbatim}
+\begin{lstlisting}
   gr.disc_light(<position>, <colour>, <attenuation>, <normal>, <radius>)
-\end{verbatim}
+\end{lstlisting}
 The command is a modification of the \verb|gr.light| command with two new
 parameters added. The \verb|<normal>| parameter specifies the normal of the disc
 light source and the \verb|<radius>| parameter specifies the radius of the disc
@@ -95,35 +95,35 @@ light source.
 \subsection*{Texture Mapping}
 The following command was added to the language to apply a texture image file
 to the specified \verb|node|:
-\begin{verbatim}
+\begin{lstlisting}
   node:set_texture(<filename>)
-\end{verbatim}
+\end{lstlisting}
 The \verb|node| object must have had a material applied before using this
 command via the \verb|set_material| command.
 
 \subsection*{Bump Mapping}
 The following command was added to the language to apply a bump map image file
 to the specified \verb|node|:
-\begin{verbatim}
+\begin{lstlisting}
   node:set_bumpmap(<filename>)
-\end{verbatim}
+\end{lstlisting}
 The \verb|node| object must have had a material applied before using this
 command via the \verb|set_material| command.
 
 \subsection*{Phong Shading}
 The following command is used to construct a mesh with a set of vertices and a
 set of faces that contain indices into the vertex list:
-\begin{verbatim}
+\begin{lstlisting}
   gr.tri_mesh(<name>, <verts>, <faces>)
-\end{verbatim}
+\end{lstlisting}
 This command differs from the \verb|gr.mesh| command in that it subdivides the
 faces into triangles as well as generating per vertex normals on instantiation.
 
 \subsection*{Refraction}
 The \verb|gr.material| command was extended as follows:
-\begin{verbatim}
+\begin{lstlisting}
   gr.material(<diffuse>, <specular>, <shininess>, <ni> = 0)
-\end{verbatim}
+\end{lstlisting}
 The optional \verb|<ni>| parameter was added to specify the index of refraction
 of the material. The default value is zero which indicates that the material is
 not refractive.
@@ -135,9 +135,9 @@ support anti-aliasing.
 \subsection*{Perlin Noise}
 The following command was added to the language to apply a procedurally
 generated texture using Perlin noise to the specified \verb|node|:
-\begin{verbatim}
+\begin{lstlisting}
   node:set_perlin(<type>)
-\end{verbatim}
+\end{lstlisting}
 The \verb|<type>| option specifies which procedural texture to apply to the
 node. The \verb|node| object must have had a material applied before using this
 command via the \verb|set_material| command.
