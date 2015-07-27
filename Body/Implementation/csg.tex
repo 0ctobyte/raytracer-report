@@ -4,13 +4,13 @@
 \section{Constructive Solid Geometry}
 
 Constructive Solid Geometry was implemented by creating a
-\verb|ConstructiveSolidGeometryNode| class which sub-classes the 
-\verb|GeometryNode| class. The \verb|ConstructiveSolidGeometryNode| class 
+\newline \verb|ConstructiveSolidGeometryNode| class which sub-classes the 
+\newline \verb|GeometryNode| class. The \verb|ConstructiveSolidGeometryNode| class 
 contains references to two \verb|GeometryNode| which represents the two
-\verb|GeometryNode|'s to be combined. Note that this structure allows for a
+\newline \verb|GeometryNode|'s to be combined. Note that this structure allows for a
 hierarchy of \verb|ConstructiveSolidGeometryNode|'s.
 
-Three sub-classes were derived from the \verb|ConstructiveSolidGeometryNode|
+Three sub-classes were derived from the \newline \verb|ConstructiveSolidGeometryNode|
 class. These are the \verb|UnionNode|, \verb|IntersectionNode| and
 \verb|DifferenceNode|. These nodes allow for the union, intersection and
 difference of two \verb|GeometryNode|'s respectively.
@@ -18,9 +18,11 @@ difference of two \verb|GeometryNode|'s respectively.
 Each of the three sub-classes implement the \verb|intersection| method. The
 implementation of the \verb|intersection| methods are described below.
 
-\subsection*{\verb|UnionNode|}
-A \verb|UnionNode| can be created by using the \verb|gr.union_node(<name>,
-<node_a>, <node_b>)| Lua command.
+\subsection*{UnionNode}
+A \verb|UnionNode| can be created by using the following Lua command: 
+\begin{verbatim}
+    gr.union_node(<name>, <node_a>, <node_b>)
+\end{verbatim}
 
 The \verb|UnionNode| is easily implemented by testing intersection on both of
 the given \verb|GeometryNode|'s. If the ray intersects with either of the 
@@ -28,23 +30,27 @@ the given \verb|GeometryNode|'s. If the ray intersects with either of the
 intersection point to the ray's origin (if both \verb|GeometryNode|'s have been 
 intersected  and returns true. 
 
-\subsection*{\verb|IntersectionNode|}
-An \verb|IntersectionNode| can be created by using the
-\verb|gr.intersection_node(<name>, <node_a>, <node_b>)| Lua command.
+\subsection*{IntersectionNode}
+An \verb|IntersectionNode| can be created by using the following Lua command:
+\begin{verbatim}
+    gr.intersection_node(<name>, <node_a>, <node_b>)
+\end{verbatim}
 
 The \verb|IntersectionNode| is easily implemented by testing intersection on
 both of the given \verb|GeometryNode|'s. If the ray intersects both of the
 \verb|GeometryNode|'s then the \verb|intersection| method selects the closest
 intersection point and returns true.
 
-\subsection*{\verb|DifferenceNode|}
-A \verb|DifferenceNode| can be created by using the
-\verb|gr.difference_node|(<name>, <node_a>, <node_b>)| Lua command.
+\subsection*{DifferenceNode}
+A \verb|DifferenceNode| can be created by using the following Lua command
+\begin{verbatim}
+    gr.difference_node(<name>, <node_a>, <node_b>)
+\end{verbatim}
 
 This node was the most difficult to implement since I had not extended the
 \verb|Intersection| structure to contain the intersection intervals. The
 algorithm is as follows. First, an intersection test is performed on 
-\verb|node_a|. If the ray intersects \vert|node_a| then an intersection test is
+\verb|node_a|. If the ray intersects \verb|node_a| then an intersection test is
 performed on \verb|node_b|. If \verb|node_b| has not been intersected then the
 method returns true with the intersection information of \verb|node_a| contained
 in the \verb|Intersection| object. Otherwise, the closest intersection point of 
