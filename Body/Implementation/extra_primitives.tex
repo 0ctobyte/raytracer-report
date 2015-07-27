@@ -9,7 +9,9 @@ section, the primtive classes were added to the \verb|primitives.cpp| source
 file.
 
 The \verb|intersection| method takes two parameters. The first parameter is a
-\verb|Ray| object and the second parameter is an \verb|Intersection| object. 
+\verb|Ray| object and the second parameter is an \verb|Intersection| object. The 
+intersection object is modified by an intersection method when an intersection 
+has occurred. The method returns true on intersection and false otherwise.
 
 A ray can be represented by the equation $R = O + t\vec{D}$ where
 O is the ray's origin and $\vec{D}$ is the ray's direction. The \verb|Ray| 
@@ -22,9 +24,8 @@ The \verb|Intersection| object is where the intersection details are
 stored such as the point of intersection, the normal at the point of
 intersection (used for lighting calculations), the material of the primitive
 (used for lighting calculations), the texture coordinates (used in texture
-mapping), and the tangent vectors (used in bump mapping). All intersection 
-tests are done in the primtives' local coordinate system with unit sized 
-primitives.
+mapping), and the tangent vectors (used in bump mapping). All intersection tests 
+are done in the primtives' local coordinate system with unit sized primitives.
 
 \subsection*{Cone}
 The \verb|gr.cone(<name>)| Lua command is used to create a single-ended cone 
