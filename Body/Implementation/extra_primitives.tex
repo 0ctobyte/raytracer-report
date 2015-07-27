@@ -11,12 +11,12 @@ file.
 The \verb|intersection| method takes two parameters. The first parameter is a
 \verb|Ray| object and the second parameter is an \verb|Intersection| object. 
 
-A ray can be represented by the equation $R = \vec{O} + t\times \vec{D}$ where
-$\vec{O}$ is the ray's origin and $\vec{D}$ is the ray's direction. The 
-\verb|Ray| object contains the ray's origin and direction. The point, $R$, on 
-the ray can be determined given the $t$ parameter. The intersection code aims to 
-calculate the value of the $t$ parameter such that the point on ray's line is 
-the point of intersection on the primitive. 
+A ray can be represented by the equation $R = O + t\times \vec{D}$ where
+O is the ray's origin and $\vec{D}$ is the ray's direction. The \verb|Ray| 
+object contains the ray's origin and direction. The point, $R$, on the ray can 
+be determined given the $t$ parameter. The intersection code aims to calculate 
+the value of the $t$ parameter such that the point on ray's line is the point 
+of intersection on the primitive. 
 
 The \verb|Intersection| object is where the intersection details are
 stored such as the point of intersection, the normal at the point of
