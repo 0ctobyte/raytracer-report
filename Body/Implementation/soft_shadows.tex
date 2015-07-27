@@ -2,3 +2,28 @@
 % Soft Shadows
 %*******************************************************
 \section{Soft Shadows}
+
+To enable soft shadows, the scene must contain area lights. The following Lua 
+command creates an area light:
+\begin{lstlisting}
+  gr.disc_light(<position>, <colour>, <attenuation>, <normal>, <radius>)
+\end{lstlisting}
+  
+An optional \verb|<shadow_samples>| parameter was added to the \verb|gr.render|
+Lua commmand to support soft shadows. The parameter specifies the number of
+shadow rays to be cast when performing lighting calculations on an intersection
+point.
+
+Soft shadows were implemented by randomly selecting a point on the disc light
+and then casting a shadow ray from the intersection point to the point on the
+disc light. The quality of the soft shadows increases as the number of shadow
+rays that are cast increases.
+
+The algorithm to select the random point on the disc light is implemented by
+randomly generating a rotation angle and scaling factor. The rotation angle is
+used to rotate a vector on the plane of the disc light and the scaling factor is 
+used to scale the vector to a length between $[0, <radius>]$. Adding the 
+resultant vector to the position of the disc light produces a point on the disc
+light. The method to generate a vector coincident with a plane given the normal
+of the plane is described in (Hughes & M{\"o}ller, 2005).
+

@@ -20,9 +20,9 @@ implementation of the \verb|intersection| methods are described below.
 
 \subsection*{UnionNode}
 A \verb|UnionNode| can be created by using the following Lua command: 
-\begin{verbatim}
+\begin{lstlisting}
     gr.union_node(<name>, <node_a>, <node_b>)
-\end{verbatim}
+\end{lstlisting}
 
 The \verb|UnionNode| is easily implemented by testing intersection on both of
 the given \verb|GeometryNode|'s. If the ray intersects with either of the 
@@ -32,9 +32,9 @@ intersected  and returns true.
 
 \subsection*{IntersectionNode}
 An \verb|IntersectionNode| can be created by using the following Lua command:
-\begin{verbatim}
+\begin{lstlisting}
     gr.intersection_node(<name>, <node_a>, <node_b>)
-\end{verbatim}
+\end{lstlisting}
 
 The \verb|IntersectionNode| is easily implemented by testing intersection on
 both of the given \verb|GeometryNode|'s. If the ray intersects both of the
@@ -43,9 +43,9 @@ intersection point and returns true.
 
 \subsection*{DifferenceNode}
 A \verb|DifferenceNode| can be created by using the following Lua command
-\begin{verbatim}
+\begin{lstlisting}
     gr.difference_node(<name>, <node_a>, <node_b>)
-\end{verbatim}
+\end{lstlisting}
 
 This node was the most difficult to implement since I had not extended the
 \verb|Intersection| structure to contain the intersection intervals. The
