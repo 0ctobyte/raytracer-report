@@ -36,17 +36,15 @@ z < h$.
 In order to determine the intersection of a ray with a cone the implicit
 equation must be solved by substituting in the equation of the ray:
 \begin{equation}
-  (O_{x} + t\vec{D}_{x})^2 + \\
-  (O_{y} + t\vec{D}_{y})^2 = \\
+  (O_{x} + t\vec{D}_{x})^2 + (O_{y} + t\vec{D}_{y})^2 = \\
   (O_{z} + t\vec{D}_{z})^2
 \end{equation}
 This equation expands to:
 \begin{equation}
 \begin{split}
-  (\vec{D}_{x}^2 + \vec{D}_{y}^2 - \vec{D}_{z}^2)t^2 + \\
-  (2O_{x}\vec{D}_{x} + 2O_{y}\vec{D}_{y} - 
-  2O_{z}\vec{D}_{z})t \\
-  + (O_{x}^2 + O_{y}^2 - O_{z}^2) = 0\label{cone2}
+  (\vec{D}_{x}^2 + \vec{D}_{y}^2 - \vec{D}_{z}^2)t^2 + (2O_{x}\vec{D}_{x} + 
+  2O_{y}\vec{D}_{y} - 2O_{z}\vec{D}_{z})t + \\
+  (O_{x}^2 + O_{y}^2 - O_{z}^2) &= 0\label{cone2}
 \end{split}
 \end{equation}
 The equation specified in~(\ref{cone2}) can be solved for $t$ using the
@@ -89,9 +87,9 @@ Similar to the cone, the intersection of a ray with a cylinder can be determined
 by solving a quadratic equation with the following coefficients:
 \begin{equation}
 \begin{split}
-  a_{2} = \vec{D}_{x}^2 + \vec{D}_{y}^2 \\
-  a_{1} = 2O_{x}\vec{D}_{x} + 2O_{y}\vec{D}_{y} \\
-  a_{0} = O_{x}^2 + O_{y}^2 - 1
+  a_{2} &= \vec{D}_{x}^2 + \vec{D}_{y}^2 \\
+  a_{1} &= 2O_{x}\vec{D}_{x} + 2O_{y}\vec{D}_{y} \\
+  a_{0} &= O_{x}^2 + O_{y}^2 - 1
 \end{split}
 \end{equation}
 The intersection of the ray with the end caps of the cylinder are determined by
@@ -156,13 +154,13 @@ than the other primitives as it requires solving a quartic equation. The
 coefficients for this quartic equation are given by [1]:
 \begin{equation}
 \begin{split}
-  a_{4} = \vec{D}\cdot\vec{D} \\
-  a_{3} = 4(\vec{D}\cdot\vec{D})(\vec{O}\cdot\vec{D}) \\
-  a_{2} = 4(\vec{O}\cdot\vec{D})^2 + 2(\vec{D}\cdot\vec{D})((\vec{O}\cdot
+  a_{4} &= \vec{D}\cdot\vec{D} \\
+  a_{3} &= 4(\vec{D}\cdot\vec{D})(\vec{O}\cdot\vec{D}) \\
+  a_{2} &= 4(\vec{O}\cdot\vec{D})^2 + 2(\vec{D}\cdot\vec{D})((\vec{O}\cdot
   \vec{O}) - r^2 - R^2) + 4R^2\vec{D}_{z}^2 \\
-  a_{1} = 4(\vec{O}\cdot\vec{D})((\vec{O}\cdot\vec{D}) - r^2 - R^2) +8R^2
+  a_{1} &= 4(\vec{O}\cdot\vec{D})((\vec{O}\cdot\vec{D}) - r^2 - R^2) +8R^2
   \vec{O}_{z}\vec{D}_{z} \\
-  a_{0} = ((\vec{O}\cdot\vec{O}) - r^2 - R^2)^2 + 4R^2\vec{O}_{z}^2 - rR^2r^2
+  a_{0} &= ((\vec{O}\cdot\vec{O}) - r^2 - R^2)^2 + 4R^2\vec{O}_{z}^2 - rR^2r^2
 \end{split}
 \end{equation}
 In the intersection method, many of the terms have been computed once and
