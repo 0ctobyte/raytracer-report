@@ -4,7 +4,7 @@
 \section{Phong Shading}
 
 Phong shading of meshes is supported with the new Lua command:
-\begin{lstListing}
+\begin{lstlisting}
   gr.tri_mesh(<name>, <verts>, <faces>)
 \end{lstlisting}
 This command differs from the \verb|gr.mesh| command in that it subdivides the
@@ -35,7 +35,7 @@ the vertex array.
 \subsection{Per-Vertex Normal Generation}
 Generating normals per-vertex is done by calculating the normals of each face
 and then adding the normal to each of the vertices connecting the face. The
-normals are then normalized to produce and averaged normal for each vertex. The
+normals are then normalized to produce an averaged normal for each vertex. The
 algorithm is shown in the below.
 
 \begin{lstlisting}
@@ -58,8 +58,8 @@ algorithm is shown in the below.
 A triangle can be defined parametrically by:
 \begin{equation}
 \begin{split}
-  f(u, v) = wV_{0} + uV_{1} + vV_{2} \\
-  w = 1 - u - v
+  f(u, v) &= wV_{0} + uV_{1} + vV_{2} \\
+  w &= 1 - u - v
 \end{split}
 \end{equation}
 The equation can be solved for $u$, $v$, and $w$ using the algorithm described
