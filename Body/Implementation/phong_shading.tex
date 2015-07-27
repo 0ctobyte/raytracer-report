@@ -2,3 +2,72 @@
 % Phong Shading
 %*******************************************************
 \section{Phong Shading}
+
+Phong shading of meshes is supported with the new Lua command:
+\begin{lstListing}
+  gr.tri_mesh(<name>, <verts>, <faces>)
+\end{lstlisting}
+This command differs from the \verb|gr.mesh| command in that it subdivides the
+faces into triangles and generates per-vertex normals on instantiation.
+
+The following subsections describe the triangulation and normal generation
+algorithms as well as the ray-triangle intersection and normal interpolation
+algorithms. 
+
+\subsection{Face Triangulation}
+Triangulating the faces is a simple matter of looping through the faces and then
+splitting the face into a triangle fan. The pseudocode of the algorithm is shown
+below. A face is defined as holding an array of integers which are indices into
+the vertex array.
+
+\begin{lstlisting}
+  function triangulate(face_list):
+    new_face_list = {}
+    for each face in face_list:
+      v0 = face[0];
+      for i = 2 to face.size():
+        new_face_list.append(face(v0, face[i-1], face[i]))
+      end
+    end
+  end
+\end{lstlisting}
+
+\subsection{Per-Vertex Normal Generation}
+Generating normals per-vertex is done by calculating the normals of each face
+and then adding the normal to each of the vertices connecting the face. The
+normals are then normalized to produce and averaged normal for each vertex. The
+algorithm is shown in the below.
+
+\begin{lstlisting}
+  function generate_normals(face_list, vert_list):
+    normal_list = {}
+    for each face in face_list:
+      normal = (face[1] - face[0]).cross(face[2] - face[0])
+      for each index in face_list:
+        normal_list[index] = normal_list[index] + normal
+      end
+    end
+
+    for each normal in normal_list:
+      normal.normalized()
+    end
+  end
+\end{lstlisting}
+
+\subsection{Ray-Triangle Intersection \& Normal Interpolation}
+A triangle can be defined parametrically by:
+\begin{equation}
+\begin{split}
+  f(u, v) = wV_{0} + uV_{1} + vV_{2} \\
+  w = 1 - u - v
+\end{split}
+\end{equation}
+The equation can be solved for $u$, $v$, and $w$ using the algorithm described
+in (M{\"o}ller \& Trumbore, 1997).
+
+Using the parametric values of $u$, $v$, and $w$ a normal can be determined by
+taking the weighted average of the surrounding vertex normals:
+\begin{equation}
+  \vec{N} = wN_{0} + uN_{1} + vN_{2}
+\end{equation}
+
