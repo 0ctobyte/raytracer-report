@@ -29,7 +29,7 @@ are done in the primtives' local coordinate system with unit sized primitives.
 
 \subsection*{Cone}
 The \verb|gr.cone(<name>)| Lua command is used to create a single-ended cone 
-aligned along the z-axis with unit height, $h$.
+aligned along the $z$-axis with unit height, $h$.
 
 The cone primitive is specified by the implicit equation $x^2 + y^2 = z^2, -h <
 z < h$.
@@ -63,23 +63,9 @@ The normal vector is calculated by the following equation:
 Where $Q$ is the intersection point. The equation is essentially calculating the
 gradient of the intersection point over the surface of the cone.
 
-The texture coordinates for the cone primitive are calculated as follows:
-\begin{equation}
-  u = \frac{acos(Q \cdot \begin{bmatrix} 1.0 & 0.0 & 0.0 \end{bmatrix}^{T})}
-  {\pi}
-\end{equation}
-\begin{equation}
-  v = \frac{Q}{h}
-\end{equation}
-Essentially, the $u$ coordinate is the angle of rotation of the vector (from
-the intersection point to the origin) about the z-axis divided by $\pi$ in 
-order to scale it to the range $[0, 1]$. The $v$ coordinate is calculated by
-dividing the position of the intersection point along the z-axis by the height
-of the cone.
-
 \subsection*{Cylinder}
 The \verb|gr.cylinder(<name>)| Lua command is used to create a cylinder aligned
-along the z-axis with unit height, $h$, and unit radius, $r$.
+along the $z$-axis with unit height, $h$, and unit radius, $r$.
 
 The cylinder primitive is specified by the implicit equation $x^2 + y^2 = r^2 =
 1, \frac{-h}{2} < z < \frac{h}{2}$.

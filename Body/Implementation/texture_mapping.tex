@@ -2,3 +2,44 @@
 % Texture Mapping
 %*******************************************************
 \section{Texture Mapping}
+
+A texture mapping is enabled by setting a texture image to a
+\verb|GeometryNode|. This can be with the following Lua command:
+\begin{lstlisting}
+  set_texture(<filename>)
+\end{lstlisting}
+This command sets the texture image on the \verb|PhongMaterial| attached to the
+\verb|GeometryNode|. 
+
+Texture mapping is implemented by generating $uv$ texture coordinates for each
+of the primitives on an intersection. The texture coordinates are then used to
+index into the texture map to produce a diffuse colour to be applied to the
+intersection point in the lighting calculations. The following subsections
+describe the $uv$ generation methods for each of the primitives and the texture
+map sampling algorithm.
+
+\subsection{Generating $uv$ Texture Coordinates}
+
+The $uv$ texture coordinates are 2D coordinates with each coordinate having a
+value in the range $[0, 1]$. This section will describe how these coordinates
+are generated for each of the primitives.
+
+\subsection*{Cone}
+The texture coordinates for the cone primitive are calculated as follows:
+\begin{equation}
+  u = \frac{acos(Q \cdot \begin{bmatrix} 1.0 & 0.0 & 0.0 \end{bmatrix}^{T})}
+  {\pi}
+\end{equation}
+\begin{equation}
+  v = \frac{Q_{z}}{h}
+\end{equation}
+Where $Q$ is the intersection point on the cone and $h$ is the height of the
+cone. Essentially, the $u$ coordinate is the angle of rotation of the vector 
+(from the origin to the intersection point) about the $z$-axis divided by $\pi$ 
+in order to scale it to the range $[0, 1]$. The $v$ coordinate is calculated by
+dividing the $z$ coordinate of the intersection point by the height (since the
+cone is aligned along the $z$-axis).
+
+\subsubsectino*{Cylinder}
+The texture coordinates for the cylinder primitive are calculated as follows
+
