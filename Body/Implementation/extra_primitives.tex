@@ -53,10 +53,14 @@ then there is no intersection. If $t$ is positive then the ray intersects the
 cone and the intersection point is checked to make sure that the inequality $-h
 < z < h$ is satisfied.
 
-The normal is calculated by the following equation:
+The normal vector is calculated by the following equation:
 \begin{equation}
-  \vec{N} = 
+  \vec{N} = \begin{bmatrix} 2\times Q.x, 2\times Q.y, -2\times Q.z
+  \end{bmatrix}^{T}
 \end{equation}
+Where $Q$ is the intersection point. The equation is essentially calculating the
+gradient of the intersection point.
+
 The texture coordinates for the cone primitive are calculated as follows:
 \begin{equation}
   u = \frac{acos(Q \cdot \begin{bmatrix} 1.0 & 0.0 & 0.0 \end{bmatrix}^{T})}{\pi}
