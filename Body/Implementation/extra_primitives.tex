@@ -36,17 +36,17 @@ z < h$.
 In order to determine the intersection of a ray with a cone the implicit
 equation must be solved by substituting in the equation of the ray:
 \begin{equation}
-  (\vec{O}.x + t\times \vec{D}.x)^2 + \\
-  (\vec{O}.y + t\times \vec{D}.y)^2 = \\
-  (\vec{O}.z + t\times \vec{D}.z)^2
+  (O.x + t\times \vec{D}.x)^2 + \\
+  (O.y + t\times \vec{D}.y)^2 = \\
+  (O.z + t\times \vec{D}.z)^2
 \end{equation}
 This equation expands to:
 \begin{equation}
 \begin{split}
   (\vec{D}.x^2 + \vec{D}.y^2 - \vec{D}.z^2)\times t^2 + \\
-  (2\vec{O}.x\times \vec{D}.x + 2\vec{O}.y\times \vec{D}.y - 
-  2\vec{O}.z\times \vec{D}.z)\times t \\
-  + (\vec{O}.x^2 + \vec{O}.y^2 - \vec{O}.z^2) = 0\label{cone2}
+  (2O.x\times \vec{D}.x + 2O.y\times \vec{D}.y - 
+  2O.z\times \vec{D}.z)\times t \\
+  + (O.x^2 + O.y^2 - O.z^2) = 0\label{cone2}
 \end{split}
 \end{equation}
 The equation specified in~(\ref{cone2}) can be solved for $t$ using the
@@ -90,8 +90,8 @@ by solving a quadratic equation with the following coefficients:
 \begin{equation}
 \begin{split}
   A = \vec{D}.x^2 + \vec{D}.y^2 \\
-  B = 2\vec{O}.x\times \vec{D}.x + 2\vec{O}.y\times \vec{D}.y \\
-  C = \vec{O}.x^2 + \vec{O}.y^2 - 1
+  B = 2O.x\times \vec{D}.x + 2O.y\times \vec{D}.y \\
+  C = O.x^2 + O.y^2 - 1
 \end{split}
 \end{equation}
 The intersection of the ray with the end caps of the cylinder are determined by
@@ -136,7 +136,7 @@ Where $\vec{N}$ is the normal vector of the plane and $P$ is a known point on
 the plane. To solve for $Q$ we must substitute the equation of the ray into the
 plane equation which we can then solve for $t$:
 \begin{equation}
-  t = \frac{\vec{N}\cdot (P - \vec{O})}{\vec{N}\cdot \vec{D}}
+  t = \frac{\vec{N}\cdot (P - O)}{\vec{N}\cdot \vec{D}}
 \end{equation}
 Once the intersection point is found, it is a simple matter of determining if
 the intersection point is within the bounded plane. This is done by simply
