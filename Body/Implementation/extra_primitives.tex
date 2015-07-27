@@ -9,15 +9,46 @@ section, the primtive classes were added to the \verb|primitives.cpp| source
 file.
 
 The \verb|intersection| method takes two parameters. The first parameter is a
-\verb|Ray| object. A ray can be represented by the equation $R = O + t*D$ where
-$O$ is the ray's origin and $D$ is the ray's direction. The \verb|Ray| object
-contains the ray's origin and direction. The point, $R$, on the ray can be 
-determined given the $t$ parameter. The intersection code aims to calculate the
-value of the $t$ parameter such that the point on ray's line is the point of
-intersection on the primitive.
+\verb|Ray| object and the second parameter is an \verb|Intersection| object. 
+
+A ray can be represented by the equation $R = O + t*D$ where $O$ is the ray's 
+origin and $D$ is the ray's direction. The \verb|Ray| object contains the ray's 
+origin and direction. The point, $R$, on the ray can be determined given the $t$ 
+parameter. The intersection code aims to calculate the value of the $t$ 
+parameter such that the point on ray's line is the point of intersection on the 
+primitive. 
+
+The \verb|Intersection| object is where the intersection details are
+stored such as the point of intersection, the normal at the point of
+intersection (used for lighting calculations), the material of the primitive
+(used for lighting calculations), the texture coordinates (used to index the
+texture image), and the tangent vectors (used in the calculation for bump
+mapping). All intersection tests are done in the primtives' local coordinate
+system with unit sized primitives.
 
 \subsection*{Cone}
+The cone primitive is specified by the implicit equation $x^2 + y^2 = z^2$ and a
+height, $h$. The height is by default set to $1.0$. The default orientation of 
+the cone is along the z-axis. The implicit equation specifies an infinite double 
+ended cone along the z-axis. The finite single-ended cone is specified by the
+equation $x^2 + y^2 = z^2, -h < z < h$. 
 
+In order to determine the intersection of a ray with a cone the implicit
+equation must be solved by substituting in the equation of the ray:
+\begin{equation}
+  (O.x + t*D.x)^2 + (O.y + t*D.y)^2 = (O.z + t*D.z)^2\label{cone1}
+\end{equation}
+This equation expands to:
+\begin{equation}
+  (D.x^2 + D.y^2 - D.z^2)*t^2 + (2*O.x*D.x + 2*O.y*D.y - 2*O.z*D.z)*t + (O.x^2 +
+  O.y^2 - O.z^2) = 0\label{cone2}
+\end{equation}
+The equation specified in~(\ref{cone2}) can be solved for $t$ using the
+quadratic equation. If the value of $t$ cannot be determined or the if $t$ is
+negative, indicating that the intersection point is behind the ray's origin,
+then there is no intersection. If $t$ is positive then the ray intersects the
+cone and the intersection point is checked to make sure that the inequality $-h
+< z < h$ is satisfied.
 
 \subsection*{Cylinder}
 
