@@ -88,9 +88,11 @@ The cylinder primitive is specified by the implicit equation $x^2 + y^2 = r^2 =
 Similar to the cone, the intersection of a ray with a cylinder can be determined
 by solving a quadratic equation with the following coefficients:
 \begin{equation}
+\begin{split}
   A = \vec{D}.x^2 + \vec{D}.y^2 \\
   B = 2\vec{O}.x\times \vec{D}.x + 2\vec{O}.y\times \vec{D}.y \\
   C = \vec{O}.x^2 + \vec{O}.y^2 - 1
+\end{split}
 \end{equation}
 The intersection of the ray with the end caps of the cylinder are determined by
 testing intersection between the ray and a disc which is described later in this
