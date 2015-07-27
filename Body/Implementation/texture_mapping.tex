@@ -24,7 +24,7 @@ The $uv$ texture coordinates are 2D coordinates with each coordinate having a
 value in the range $[0, 1]$. This section will describe how these coordinates
 are generated for each of the primitives.
 
-\subsection*{Cone}
+\subsubsection*{Cone}
 The texture coordinates for the cone primitive are calculated as follows:
 \begin{equation}
   u = \frac{acos(Q \cdot \begin{bmatrix} 1.0 & 0.0 & 0.0 \end{bmatrix}^{T})}
@@ -40,6 +40,6 @@ in order to scale it to the range $[0, 1]$. The $v$ coordinate is calculated by
 dividing the $z$ coordinate of the intersection point by the height (since the
 cone is aligned along the $z$-axis).
 
-\subsubsectino*{Cylinder}
+\subsubsection*{Cylinder}
 The texture coordinates for the cylinder primitive are calculated as follows
 
