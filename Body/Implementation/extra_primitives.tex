@@ -27,16 +27,18 @@ mapping). All intersection tests are done in the primtives' local coordinate
 system with unit sized primitives.
 
 \subsection*{Cone}
+The \verb|gr.cone(<name>)| Lua is used to create a cone.
+
 The cone primitive is specified by the implicit equation $x^2 + y^2 = z^2$ and 
-unit height, $h$. The default orientation of the cone is along the z-axis. The 
-implicit equation specifies an infinite double ended cone along the z-axis. The 
-finite single-ended cone is specified by the equation 
-$x^2 + y^2 = z^2, -h < z < h$. 
+unit height, $h$. The orientation of the cone is along the z-axis. The implicit 
+equation specifies an infinite double ended cone along the z-axis. The finite 
+single-ended cone is specified by the equation $x^2 + y^2 = z^2, -h < z < h$. 
 
 In order to determine the intersection of a ray with a cone the implicit
 equation must be solved by substituting in the equation of the ray:
 \begin{equation}
-  (O.x + t\times D.x)^2 + (O.y + t\times D.y)^2 = (O.z + t\times D.z)^2\label{cone1}
+  (O.x + t\times D.x)^2 + (O.y + t\times D.y)^2 = (O.z + t\times D.z)^2
+  \label{cone1}
 \end{equation}
 This equation expands to:
 \begin{equation}
@@ -59,11 +61,12 @@ The normal vector is calculated by the following equation:
   \end{bmatrix}^{T}
 \end{equation}
 Where $Q$ is the intersection point. The equation is essentially calculating the
-gradient of the intersection point.
+gradient of the intersection point over the surface of the cone.
 
 The texture coordinates for the cone primitive are calculated as follows:
 \begin{equation}
-  u = \frac{acos(Q \cdot \begin{bmatrix} 1.0 & 0.0 & 0.0 \end{bmatrix}^{T})}{\pi}
+  u = \frac{acos(Q \cdot \begin{bmatrix} 1.0 & 0.0 & 0.0 \end{bmatrix}^{T})}
+  {\pi}
 \end{equation}
 \begin{equation}
   v = \frac{Q}{h}
@@ -75,8 +78,40 @@ dividing the position of the intersection point along the z-axis by the height
 of the cone.
 
 \subsection*{Cylinder}
+The \verb|gr.cylinder(<name>)| Lua command is used to create a cylinder.
+
+The cylinder primitive is specified by the implicit equation $x^2 + y^2 = 1$ and
+unit height, $h$. The orientation of the cylinder is along the z-axis. The
+finite cylinder must satisfy the equation $\frac{-h}{2} < z < \frac{h}{2}$.
+
+Similar to the cone, the intersection of a ray with a cylinder can be determined
+by solving a quadratic equation with the following coefficients:
+\begin{equation}
+  A = D.x^2 + D.y^2 \\
+  B = 2O.x\times D.x + 2O.y\times D.y \\
+  C = O.x^2 + O.y^2 - 1
+\end{equation}
+The intersection of the ray with the end caps of the cylinder are determined by
+testing intersection between the ray and a disc which is described later in this
+section.
+
+The normal vector is easily determined. It is essentially the vector from the
+origin to the intersection point and dropping the $z$ coordinate.
 
 \subsection*{Disc}
+The \verb|gr.disc(<name>)| command is used to create a disc centered at the
+origin and lying on the $xy$-plane with unit radius, $r$.
+
+To determine the intersection of the ray with the disc, it is a simple matter of
+determining if the ray intersects the plane that contains the disc and then
+validating whether the intersection point lies within the disc's area. The
+ray-plane intersection is described later in this section. To validate whether
+the intersection point is within the disc's area, the following inequality must
+be satisfied:
+\begin{equation}
+  Q\cdot Q \eq r^2
+\end{equation}
+Where $Q$ is the vector from the origin to the intersection vector.
 
 \subsection*{Plane}
 
