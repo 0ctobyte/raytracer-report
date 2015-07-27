@@ -11,12 +11,12 @@ file.
 The \verb|intersection| method takes two parameters. The first parameter is a
 \verb|Ray| object and the second parameter is an \verb|Intersection| object. 
 
-A ray can be represented by the equation $R = O + t*D$ where $O$ is the ray's 
-origin and $D$ is the ray's direction. The \verb|Ray| object contains the ray's 
-origin and direction. The point, $R$, on the ray can be determined given the $t$ 
-parameter. The intersection code aims to calculate the value of the $t$ 
-parameter such that the point on ray's line is the point of intersection on the 
-primitive. 
+A ray can be represented by the equation $R = \vec{O} + t\times \vec{D}$ where
+$\vec{O}$ is the ray's origin and $\vec{D}$ is the ray's direction. The 
+\verb|Ray| object contains the ray's origin and direction. The point, $R$, on 
+the ray can be determined given the $t$ parameter. The intersection code aims to 
+calculate the value of the $t$ parameter such that the point on ray's line is 
+the point of intersection on the primitive. 
 
 The \verb|Intersection| object is where the intersection details are
 stored such as the point of intersection, the normal at the point of
@@ -27,25 +27,26 @@ mapping). All intersection tests are done in the primtives' local coordinate
 system with unit sized primitives.
 
 \subsection*{Cone}
-The \verb|gr.cone(<name>)| Lua is used to create a cone.
+The \verb|gr.cone(<name>)| Lua command is used to create a single-ended cone 
+aligned along the z-axis with unit height, $h$.
 
-The cone primitive is specified by the implicit equation $x^2 + y^2 = z^2$ and 
-unit height, $h$. The orientation of the cone is along the z-axis. The implicit 
-equation specifies an infinite double ended cone along the z-axis. The finite 
-single-ended cone is specified by the equation $x^2 + y^2 = z^2, -h < z < h$. 
+The cone primitive is specified by the implicit equation $x^2 + y^2 = z^2, -h <
+z < h$.
 
 In order to determine the intersection of a ray with a cone the implicit
 equation must be solved by substituting in the equation of the ray:
 \begin{equation}
-  (O.x + t\times D.x)^2 + (O.y + t\times D.y)^2 = (O.z + t\times D.z)^2
-  \label{cone1}
+  (\vec{O}.x + t\times \vec{D}.x)^2 + \\
+  (\vec{O}.y + t\times \vec{D}.y)^2 = \\
+  (\vec{O}.z + t\times \vec{D}.z)^2
 \end{equation}
 This equation expands to:
 \begin{equation}
 \begin{split}
-  (D.x^2 + D.y^2 - D.z^2)\times t^2 + \\
-  (2O.x\times D.x + 2O.y\times D.y - 2O.z\times D.z)\times t \\
-  + (O.x^2 + O.y^2 - O.z^2) = 0\label{cone2}
+  (\vec{D}.x^2 + \vec{D}.y^2 - \vec{D}.z^2)\times t^2 + \\
+  (2\vec{O}.x\times \vec{D}.x + 2\vec{O}.y\times \vec{D}.y - 
+  2\vec{O}.z\times \vec{D}.z)\times t \\
+  + (\vec{O}.x^2 + \vec{O}.y^2 - \vec{O}.z^2) = 0\label{cone2}
 \end{split}
 \end{equation}
 The equation specified in~(\ref{cone2}) can be solved for $t$ using the
@@ -78,28 +79,28 @@ dividing the position of the intersection point along the z-axis by the height
 of the cone.
 
 \subsection*{Cylinder}
-The \verb|gr.cylinder(<name>)| Lua command is used to create a cylinder.
+The \verb|gr.cylinder(<name>)| Lua command is used to create a cylinder aligned
+along the z-axis with unit height, $h$, and unit radius, $r$.
 
-The cylinder primitive is specified by the implicit equation $x^2 + y^2 = 1$ and
-unit height, $h$. The orientation of the cylinder is along the z-axis. The
-finite cylinder must satisfy the equation $\frac{-h}{2} < z < \frac{h}{2}$.
+The cylinder primitive is specified by the implicit equation $x^2 + y^2 = r^2 =
+1, \frac{-h}{2} < z < \frac{h}{2}$.
 
 Similar to the cone, the intersection of a ray with a cylinder can be determined
 by solving a quadratic equation with the following coefficients:
 \begin{equation}
-  A = D.x^2 + D.y^2 \\
-  B = 2O.x\times D.x + 2O.y\times D.y \\
-  C = O.x^2 + O.y^2 - 1
+  A = \vec{D}.x^2 + \vec{D}.y^2 \\
+  B = 2\vec{O}.x\times \vec{D}.x + 2\vec{O}.y\times \vec{D}.y \\
+  C = \vec{O}.x^2 + \vec{O}.y^2 - 1
 \end{equation}
 The intersection of the ray with the end caps of the cylinder are determined by
 testing intersection between the ray and a disc which is described later in this
 section.
 
 The normal vector is easily determined. It is essentially the vector from the
-origin to the intersection point and dropping the $z$ coordinate.
+origin to the intersection point with the $z$ coordinate set to zero.
 
 \subsection*{Disc}
-The \verb|gr.disc(<name>)| command is used to create a disc centered at the
+The \verb|gr.disc(<name>)| Lua command is used to create a disc centered at the
 origin and lying on the $xy$-plane with unit radius, $r$.
 
 To determine the intersection of the ray with the disc, it is a simple matter of
@@ -113,7 +114,31 @@ be satisfied:
 \end{equation}
 Where $Q$ is the vector from the origin to the intersection vector.
 
+Since the disc lies on the $xy$-plane, the normal vector is simply
+$\begin{bmatrix} 0.0 & 0.0 & 1.0
+\end{bmatrix}^{T}$.
+
 \subsection*{Plane}
+The \verb|gr.plane(<name>)| Lua command is used to create a bounded plane 
+centered at the origin and lying on the $xz$-plane with unit height, $h$, and 
+width, $w$. In reality, this primitive isn't really a plane but a rectangle
+(unit square). However, it can be scaled to larger size. This primitive was
+added since it provides a more efficient way for modelling walls or ground in a
+scene.
+
+A point $Q$ on a plane can be found with the following equation:
+\begin{equation}
+  \vec{N}\cdot (Q - P) = 0
+\end{equation}
+Where $\vec{N}$ is the normal vector of the plane and $P$ is a known point on
+the plane. To solve for $Q$ we must substitute the equation of the ray into the
+plane equation which we can then solve for $t$:
+\begin{equation}
+  t = \frac{\vec{N}\cdot (P - \vec{O})}{\vec{N}\cdot \vec{D}}
+\end{equation}
+Once the intersection point is found, it is a simple matter of determining if
+the intersection point is within the bounded plane. This is done by simply
+validating whether the $x$ and $z$ coordinates are within the unit square.
 
 \subsection*{Torus}
 
