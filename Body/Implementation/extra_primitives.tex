@@ -15,16 +15,16 @@ A ray can be represented by the equation $R = O + t\vec{D}$ where
 O is the ray's origin and $\vec{D}$ is the ray's direction. The \verb|Ray| 
 object contains the ray's origin and direction. The point, $R$, on the ray can 
 be determined given the $t$ parameter. The intersection code aims to calculate 
-the value of the $t$ parameter such that the point on ray's line is the point 
-of intersection on the primitive. 
+the value of the $t$ parameter such that the point on the ray's line is the 
+point of intersection on the primitive. 
 
 The \verb|Intersection| object is where the intersection details are
 stored such as the point of intersection, the normal at the point of
 intersection (used for lighting calculations), the material of the primitive
-(used for lighting calculations), the texture coordinates (used to index the
-texture image), and the tangent vectors (used in the calculation for bump
-mapping). All intersection tests are done in the primtives' local coordinate
-system with unit sized primitives.
+(used for lighting calculations), the texture coordinates (used in texture
+mapping), and the tangent vectors (used in bump mapping). All intersection 
+tests are done in the primtives' local coordinate system with unit sized 
+primitives.
 
 \subsection*{Cone}
 The \verb|gr.cone(<name>)| Lua command is used to create a single-ended cone 
@@ -160,23 +160,23 @@ coefficients for this quartic equation are given by [1]:
   \vec{O}) - r^2 - R^2) + 4R^2\vec{D}_{z}^2 \\
   a_{1} &= 4(\vec{O}\cdot\vec{D})((\vec{O}\cdot\vec{D}) - r^2 - R^2) +8R^2
   \vec{O}_{z}\vec{D}_{z} \\
-  a_{0} &= ((\vec{O}\cdot\vec{O}) - r^2 - R^2)^2 + 4R^2\vec{O}_{z}^2 - rR^2r^2
+  a_{0} &= ((\vec{O}\cdot\vec{O}) - r^2 - R^2)^2 + 4R^2\vec{O}_{z}^2 - 4R^2r^2
 \end{split}
 \end{equation}
 In the intersection method, many of the terms have been computed once and
 assigned to a variable so as to minimize computational overhead.
 
 The normal vector, $\vec{N}$, at the surface of the intersection point is 
-determined by taking the gradient of the implicit equation, $f$ at the 
+determined by taking the gradient of the implicit equation, $f$, at the 
 intersection point:
 \begin{equation}
 \begin{split}
   \vec{N} &= \begin{bmatrix} \frac{\delta f}{\delta x} & \frac{\delta f}{\delta
   y} & \frac{\delta f}{\delta z}
-  \end{bmatirx}^{T} \\
+  \end{bmatrix}^{T} \\
   \frac{\delta f}{\delta x} &= 4x(x^2 + y^2 + z^2 - r^2 - R^2) \\
   \frac{\delta f}{\delta y} &= 4y(x^2 + y^2 + z^2 - r^2 - R^2) \\
-  \frac{\delta f}{\delta z} &= 4z(x^2 + y^2 + z^2 - r^2 - R^2) + 8R^2Q_{z}
+  \frac{\delta f}{\delta z} &= 4z(x^2 + y^2 + z^2 - r^2 - R^2) + 8R^2z
 \end{split}
 \end{equation}
 Then solving the gradient by substituting:
@@ -186,5 +186,6 @@ Then solving the gradient by substituting:
   y = Q_{y} \\
   z = Q_{z}
 \end{split}
-\begin{equation}
+\end{equation}
+Where $Q$ is the intersection point.
 
