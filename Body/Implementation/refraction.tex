@@ -2,3 +2,48 @@
 % Refraction
 %*******************************************************
 \section{Refraction}
+
+Refraction is supported with the optional \verb|<ni>| parameter in the
+\verb|gr.material| command. The parameter specifies the index of refraction of
+the material and is used in the refraction calculations.
+
+Refraction is implemented similarly to mirror reflections. When a ray intersects
+and object, a secondary refraction ray is generated and traced recursively.
+
+I assume that the ray always goes from air to material or material to air. Thus,
+it is necessary to first determine if the ray is entering an object or leaving
+and object. This can be determined by taking the dot product of the ray's
+direction vector, $\vec{D}$,  and the surface normal, $\vec{N}$. If the result 
+is positive then the ray is leaving the object. Otherwise, the ray is entering 
+the object. We can now define $n_{r} = \frac{n_{i}}{n_{t}}$ where $n_{i}$ is the 
+index of refraction of the material that the ray is leaving and $n_{t}$ is the 
+index of refraction of the material that the ray is entering. One of these 
+indices of refraction will equal to $1.0$ (the index of refraction of air).
+
+To calculate the refraction ray, $\vec{t}$, we must solve the following 
+equation:
+\begin{equation}
+\begin{split}
+  \vec{t} = (-n_{r}(\vec{D}\cdot\vec\vec{N}) - \sqrt{1 - n_{r}^2(1 -
+  (\vec{D}\cdot\vec{N})^2)})\vec{N} + n_{r}\vec{D}
+\end{split}
+\end{equation}
+However, if the term inside the square root is negative then the refracted ray
+undergoes total internal reflection and so the refraction ray will not be
+traced.
+
+The \verb|a4_refract| function in \verb|a4.cpp| performs the above calculation
+as well calculating the Fresnel coefficient, $R$, using the following formulas:
+\begin{equation}
+\begin{split}
+  a = \vec{D}\cdot\vec{N} \\
+  b = 1 - n_{r}^2(1 - a^2) \\
+  R_{0} = \frac{an_{i} - bn_{t}}{an_{i} + bn_{t}}
+  R_{1} = \frac(an_{t} - bn_{i}}{an_{t} + bn_{i}}
+  R = \frac{R_{0}^2 + R_{1}^2}{2}
+\end{split}
+\end{equation}
+The Fresnel coefficient, $R$, is multiplied by the colour sampled by the
+reflection ray and $(1 - R)$ is multiplied by the colour sampled by the
+refraction ray to produce the final balanced colour of the secondary rays.
+
