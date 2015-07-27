@@ -2,3 +2,33 @@
 % Glossy Reflections
 %*******************************************************
 \section{Glossy Reflections}
+
+Glossy reflections can be enabled by setting the optional \verb|<glossy_samples|
+parameter in the \verb|gr.render| Lua command.
+
+Glossy reflections are implemented by perturbing the reflection ray to a random
+point inside of a rectangle defined with a normal in the same direction as the
+unperturbed reflection ray, $\vec{r}$ and centered at the point $r$ 
+(Shirley \& Marschner, 2009). Many of these reflection rays are cast per pixel 
+as defined by \verb|glossy_samples| parameter.
+
+Thus, the following values must be calculated:
+\begin{equation}
+\begin{split}
+  i = \frac{a}{2} + \zeta_{0}a \\
+  j = \frac{a}{2} + \zeta_{1}a
+\end{split}
+\end{split}
+Where $a$ is the glossiness value and is calculated by $a = \frac{1}{1 + n_{s}}$
+and $n_{s}$ is the Phong specular exponent. $\zeta_{0}$ and $\zeta_{1}$ are
+uniform random numbers in the range $[0, 1]$.
+
+These values are then used to calculate the perturbed reflection ray:
+\begin{equation}
+  \vec{r} = r + i\vec{U} + j\vec{V}
+\end{equation}
+Where $\vec{U}$ and $\vec{V}$ are orthogonal vectors in the plane of the
+$a\times a$ rectangle centered at $r$. These vectors can be generated using the
+algorithm described in (Hughes \& M{\"o}ller, 2005) where the normal vector is
+simply in the direction of the unperturbed reflection ray.
+
