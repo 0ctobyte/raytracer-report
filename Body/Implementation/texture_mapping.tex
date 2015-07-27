@@ -4,7 +4,8 @@
 \section{Texture Mapping}
 
 A texture mapping is enabled by setting a texture image to a
-\verb|GeometryNode|. This can be with the following Lua command:
+\newline \verb|GeometryNode|. This can be with the following Lua 
+command:
 \begin{lstlisting}
   set_texture(<filename>)
 \end{lstlisting}
@@ -27,7 +28,7 @@ are generated for each of the primitives.
 \subsubsection*{Cone}
 The texture coordinates for the cone primitive are calculated as follows:
 \begin{equation}
-\end{split}
+\begin{split}
   u &= \frac{acos(Q \cdot \begin{bmatrix} 1.0 & 0.0 & 0.0 \end{bmatrix}^{T})}
   {\pi} \\
   v &= \frac{Q_{z}}{h}
@@ -45,7 +46,7 @@ The texture coordinates for the cylinder primitive are generated in a similar
 fashion as the cone:
 \begin{equation}
 \begin{split}
-  u &= \frac{acos(\begin{bmatrix} Q_{x} & Q_{y} & 0.0 \end{bmatrix|^{T} \cdot 
+  u &= \frac{acos(\begin{bmatrix} Q_{x} & Q_{y} & 0.0 \end{bmatrix}^{T} \cdot 
   \begin{bmatrix} 1.0 & 0.0 & 0.0 \end{bmatrix}^{T})}{\pi} \\
   v &= \frac{Q_{z}}{h} + 0.5
 \end{split}
@@ -82,7 +83,7 @@ To find the $uv$ coordinates for the torus we first need to define two angles.
 \begin{equation}
 \begin{split}
   \theta &= asin(\frac{Q_{z}}{r}) \\
-  \phi &= asin(\frac{Q_{y}}{R + rcos(\theta)})
+  \phi &= asin(\frac{Q_{y}}{r_{0} + r_{1}cos(\theta)})
 \end{split}
 \end{equation}
 Where $r_{0}$ is the major radius and $r_{1}$ is the minor radius. The geometric
@@ -92,8 +93,8 @@ torus' tube to the intersection point. The angle $\phi$ is the radial angle of
 the vector from the origin to the intersection point.
 
 \begin{figure}[ht]
-  \includegraphics[width=0.5*\textwidth, center]{torus}
-  \caption{Illustration of the geometric meaning of the angles \theta and \phi}
+  \includegraphics[width=0.5\textwidth, center]{torus}
+  \caption{Illustration of the geometric meaning of the angles $\theta$ and $\phi$ (Bourke, 1990).}
   \label{fig:image3}
 \end{figure}
 
@@ -124,7 +125,7 @@ take a weighted average of the surrounding four pixels of the texture coordinate
 the texture map, the larger the weight of that pixel on the final colour.
 
 \begin{figure}[ht]
-  \includegraphics[width=0.5*\textwidth, center]{bilinear_filtering}
+  \includegraphics[width=0.5\textwidth, center]{bilinear_filtering}
   \caption{$C_{00}$, $C_{01}$, $C_{10}$, $C_{11}$ represent the colour of the
   surrounding pixels. The area of the four rectangles created by the $uv$ 
   texture coordinate are used as the weights for the colour values.}
@@ -134,10 +135,10 @@ the texture map, the larger the weight of that pixel on the final colour.
 Thus, the colour, $C$, can be calculated using bilinear filtering as follows:
 \begin{equation}
 \begin{split}
-  u_{p} = u(w - 1) - i \\
-  v_{p} = v(h - 1) - j \\
-  C = (1 - u_{p})(1 - v{p})C_{00} + (1 - u_{p})(v_{p})C_{01} + (u_{p})(1 -
-  v_{p})C_{10} + (u_{p})(v_{p})C_{11}
+  u_{p} &= u(w - 1) - i \\
+  v_{p} &= v(h - 1) - j \\
+  C &= (1 - u_{p})(1 - v{p})C_{00} + (1 - u_{p})(v_{p})C_{01} + \\
+  & (u_{p})(1 - v_{p})C_{10} + (u_{p})(v_{p})C_{11}
 \end{split}
 \end{equation}
 
