@@ -36,13 +36,13 @@ $x^2 + y^2 = z^2, -h < z < h$.
 In order to determine the intersection of a ray with a cone the implicit
 equation must be solved by substituting in the equation of the ray:
 \begin{equation}
-  (O.x + t*D.x)^2 + (O.y + t*D.y)^2 = (O.z + t*D.z)^2\label{cone1}
+  (O.x + t\times D.x)^2 + (O.y + t\times D.y)^2 = (O.z + t\times D.z)^2\label{cone1}
 \end{equation}
 This equation expands to:
 \begin{equation}
 \begin{split}
-  (D.x^2 + D.y^2 - D.z^2)*t^2 + \\
-  (2*O.x*D.x + 2*O.y*D.y - 2*O.z*D.z)*t \\
+  (D.x^2 + D.y^2 - D.z^2)\times t^2 + \\
+  (2O.x\times D.x + 2O.y\times D.y - 2O.z\times D.z)\times t \\
   + (O.x^2 + O.y^2 - O.z^2) = 0\label{cone2}
 \end{split}
 \end{equation}
@@ -55,7 +55,7 @@ cone and the intersection point is checked to make sure that the inequality $-h
 
 The normal vector is calculated by the following equation:
 \begin{equation}
-  \vec{N} = \begin{bmatrix} 2\times Q.x, 2\times Q.y, -2\times Q.z
+  \vec{N} = \begin{bmatrix} 2Q.x & 2Q.y & -2Q.z
   \end{bmatrix}^{T}
 \end{equation}
 Where $Q$ is the intersection point. The equation is essentially calculating the
