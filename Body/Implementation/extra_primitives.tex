@@ -8,8 +8,16 @@ implemented for each of the extra primitives. As mentioned in the previous
 section, the primtive classes were added to the \verb|primitives.cpp| source 
 file.
 
+The \verb|intersection| method takes two parameters. The first parameter is a
+\verb|Ray| object. A ray can be represented by the equation $R = O + t*D$ where
+$O$ is the ray's origin and $D$ is the ray's direction. The \verb|Ray| object
+contains the ray's origin and direction. The point, $R$, on the ray can be 
+determined given the $t$ parameter. The intersection code aims to calculate the
+value of the $t$ parameter such that the point on ray's line is the point of
+intersection on the primitive.
+
 \subsection*{Cone}
-\lipsum[1]
+
 
 \subsection*{Cylinder}
 
