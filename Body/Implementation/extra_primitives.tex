@@ -53,6 +53,11 @@ then there is no intersection. If $t$ is positive then the ray intersects the
 cone and the intersection point is checked to make sure that the inequality $-h
 < z < h$ is satisfied.
 
+The texture coordinates for the cone primitive are calculated as follows:
+\begin{equation}
+  u = \frac{acos(Q \cdot \{1.0, 0.0, 0.0\})}{\pi}
+\end{equation}
+
 \subsection*{Cylinder}
 
 \subsection*{Disc}
