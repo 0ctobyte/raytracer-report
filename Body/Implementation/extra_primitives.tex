@@ -27,11 +27,10 @@ mapping). All intersection tests are done in the primtives' local coordinate
 system with unit sized primitives.
 
 \subsection*{Cone}
-The cone primitive is specified by the implicit equation $x^2 + y^2 = z^2$ and a
-height, $h$. The height is by default set to $1.0$. The default orientation of 
-the cone is along the z-axis. The implicit equation specifies an infinite double 
-ended cone along the z-axis. The finite single-ended cone is specified by the
-equation $x^2 + y^2 = z^2, -h < z < h$. 
+The cone primitive is specified by the implicit equation $x^2 + y^2 = z^2$ and unit 
+height, $h$. The default orientation of the cone is along the z-axis. The implicit 
+equation specifies an infinite double ended cone along the z-axis. The finite 
+single-ended cone is specified by the equation $x^2 + y^2 = z^2, -h < z < h$. 
 
 In order to determine the intersection of a ray with a cone the implicit
 equation must be solved by substituting in the equation of the ray:
@@ -55,8 +54,18 @@ cone and the intersection point is checked to make sure that the inequality $-h
 
 The texture coordinates for the cone primitive are calculated as follows:
 \begin{equation}
-  u = \frac{acos(Q \cdot \{1.0, 0.0, 0.0\})}{\pi}
+  u = \frac{acos(Q \cdot [1.0, 0.0, 0.0]^T)}{\pi}
 \end{equation}
+\begin{equation}
+  v = \frac{Q}{h}
+\end{equation}
+Where $Q$ is the 3D intersection point (represented by a vector in order to
+perform the dot product calculation) and $h$ is the height of the cone.
+Essentially, the $u$ coordinate is the angle of rotation of the vector (from
+the intersection point to the origin) about the z-axis divided by $\pi$ in 
+order to scale it to the range $[0, 1]$. The $v$ coordinate is calculated by
+dividing the position of the intersection point along the z-axis by the height
+of the cone.
 
 \subsection*{Cylinder}
 
