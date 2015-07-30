@@ -20,7 +20,7 @@ splitting the face into a triangle fan. The pseudocode of the algorithm is shown
 below. A face is defined as holding an array of integers which are indices into
 the vertex array.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Mesh face triangulation}]
   function triangulate(face_list):
     new_face_list = {}
     for each face in face_list:
@@ -38,7 +38,7 @@ and then adding the normal to each of the vertices connecting the face. The
 normals are then normalized to produce an averaged normal for each vertex. The
 algorithm is shown in the below.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Generating per-vertex normals}]
   function generate_normals(face_list, vert_list):
     normal_list = {}
     for each face in face_list:
