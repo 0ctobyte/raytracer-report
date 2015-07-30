@@ -95,7 +95,7 @@ the vector from the origin to the intersection point.
 \begin{figure}[ht]
   \includegraphics[width=0.5\textwidth, center]{torus}
   \caption{Illustration of the geometric meaning of the angles $\theta$ and 
-  $\phi$ (Bourke, 1990).}
+  $\phi$ \cite{3_bourke_1990}.}
   \label{fig:image3}
 \end{figure}
 
@@ -120,10 +120,11 @@ Where $w$ and $h$ are the width and height of texture map, respectively.
 
 However, this does not produce very nice images since the $uv$ coordinates may
 in fact index in between pixels in the texture map. A simple method to solve
-this issue is to use bilinear filtering \cite{BlinnNewell-1976}. The idea is to
-take a weighted average of the surrounding four pixels of the texture coordinate
-(Figure~\ref{fig:image4}). The closer the texture coordinate is to a pixel in
-the texture map, the larger the weight of that pixel on the final colour.
+this issue is to use bilinear filtering \cite{2_blinn_newell_1976}. The idea is 
+to take a weighted average of the surrounding four pixels of the texture 
+coordinate (Figure~\ref{fig:image4}). The closer the texture coordinate is to a 
+pixel in the texture map, the larger the weight of that pixel on the final 
+colour.
 
 \begin{figure}[ht]
   \includegraphics[width=0.5\textwidth, center]{bilinear_filtering}

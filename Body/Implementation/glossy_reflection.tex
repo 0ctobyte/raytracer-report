@@ -10,8 +10,8 @@ Glossy reflections can be enabled by setting the optional
 Glossy reflections are implemented by perturbing the reflection ray to a random
 point inside of a rectangle defined with a normal in the same direction as the
 unperturbed reflection ray, $\vec{r}$ and centered at the point $r$ 
-(Shirley \& Marschner, 2009). Many of these reflection rays are cast per pixel 
-as defined by \verb|glossy_samples| parameter.
+\cite{12_shirley_marschner_2009}. Many of these reflection rays are cast per 
+pixel as defined by \verb|glossy_samples| parameter.
 
 Thus, the following values must be calculated:
 \begin{equation}
@@ -30,6 +30,6 @@ These values are then used to calculate the perturbed reflection ray:
 \end{equation}
 Where $\vec{U}$ and $\vec{V}$ are orthogonal vectors in the plane of the
 $a\times a$ rectangle centered at $r$. These vectors can be generated using the
-algorithm described in (Hughes \& M{\"o}ller, 2005) where the normal vector is
+algorithm described in \cite{6_hughes_möller_2005} where the normal vector is
 simply in the direction of the unperturbed reflection ray.
 
