@@ -10,9 +10,9 @@ Perlin noise can be enabled with the following Lua command:
 This sets the perlin texture on the \verb|PhongMaterial| for the specified 
 \verb|GeometryNode|.
 
-The Perlin noise algorithm is implemented exactly as described in (Perlin,
-2002). The noise function follows the reference implementation as closely as
-possibly.
+The Perlin noise algorithm is implemented exactly as described in
+\cite{11_perlin_2002}. The noise function follows the reference implementation 
+as closely as possibly.
 
 The noise function takes in as input 3D coordinates and produces a floating
 point value in the range $[0, 1]$. The algorithm requires that a hash table is
@@ -32,5 +32,5 @@ The \verb|Perlin| class also implements three other static functions which
 produce natural textures. The \verb|Perlin::marble| function produces marble
 like textures. The \verb|Perlin::cloud| function produces cloud like textures
 and the \verb|Perlin::wood| function produces wood like textures. These
-functions implement algorithms found in (Kora, 2007). 
+functions implement algorithms found in \cite{7_kora_2007}. 
 
